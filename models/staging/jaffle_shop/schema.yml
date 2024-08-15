@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop__raw_orders
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('stg_jaffle_shop__raw_customers')
+              field: customer_id 
