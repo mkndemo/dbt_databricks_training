@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop__raw_orders
+    description: "staging orders for the jaffleshop"
+    columns:
+      - name: order_id
+        description: "staging order id which should be unique"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - relationships:
+              to: ref('stg_jaffle_shop__raw_customers')
+              field: customer_id 

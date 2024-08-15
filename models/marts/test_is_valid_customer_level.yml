@@ -1,0 +1,23 @@
+unit_tests:
+  - name: test_customer_tag_assignment
+    description: "Test that customers are correctly assigned a tag of 'Gold', 'Silver', or 'Bronze' based on their order_total."
+    model: fct_orders
+    given:
+      - input: ref('stg_jaffle_shop__raw_customers')
+        rows:
+          - {customer_id: 1, full_name: "Alice"}
+          - {customer_id: 2, full_name: "Bob"}
+          - {customer_id: 3, full_name: "Charlie"}
+          - {customer_id: 4, full_name: "Diana"}
+      - input: ref('stg_jaffle_shop__raw_orders')
+        rows:
+          - {customer_id: 1, order_total: 50.00}
+          - {customer_id: 2, order_total: 30.00}
+          - {customer_id: 3, order_total: 10.00}
+          - {customer_id: 4, order_total: 0.00}
+    expect:
+      rows:
+        - {customer_id: 1, customer_level: "Gold"}
+        - {customer_id: 2, customer_level: "Silver"}
+        - {customer_id: 3, customer_level: "Bronze"}
+        - {customer_id: 4, customer_level: "Bronze"}
