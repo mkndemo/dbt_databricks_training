@@ -1,9 +1,0 @@
-version: 2
-#emea.dbt_mkn_training.raw_customers
-sources:
-  - name: jaffle_shop
-    database: emea
-    schema: dbt_mkn_training
-    tables:
-      - name: raw_customers
-      - name: raw_orders
